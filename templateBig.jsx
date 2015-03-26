@@ -32,8 +32,9 @@ var bigReact = new React.createClass({
 			
 			if(user && user.inbox){
 				for(var i=0,il=user.inbox.length;i<il;i++){
-					if(user.inbox[i]._id == imageId)
-						big = user.inbox[i]; //console.log(user.inbox[i]);
+					if(user.inbox[i]._id == imageId){
+						big = user.inbox[i]; console.log(user.inbox[i]);
+					}
 				}
 			}
 			self.setState({big: big});	
