@@ -15,6 +15,7 @@ Package.on_use(function (api) {
     'tracker',
     'session',
     'pedrohenriquerls:reactjs',
+    'youiest:vote',
     ], ['client', 'server']);
 
   // like Document W will be an extended coll..
@@ -57,7 +58,8 @@ Package.on_test(function (api) {
       'tracker',
       'session',
       'pedrohenriquerls:reactjs',
-
+      'youiest:vote',
+      
       'underscore',
       'ground:db',
       'aldeed:console-me',
