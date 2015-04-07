@@ -104,11 +104,11 @@ var bigReact = new React.createClass({
 			o.big = {};
 		}
 		o.vote = Vote.findOne({"userId": userId, "imageId": o.big._id});
-		if(o.vote){
-			this.onRecommend(options);
-		}else{
+		// if(o.vote){
+		// 	this.onRecommend(options);
+		// }else{
 			this.onVote(options);
-		}
+		// }
 	},
 	"onRecommend": function(options){
 		console.log("onRecommend");
@@ -163,11 +163,13 @@ var bigReact = new React.createClass({
 		vote.image_low = o.big.image_low;
 		vote.XP = o.XP;
 		vote.YP = o.YP;
+		vote.from_user = userId;
+		vote._id = Random.id();
+		vote.to_user = vote.imageId;
 		// }
-		
-		
 
-		Vote.insert(vote);
+		Unionize.connect(vote);
+		// Vote.insert(vote);
 		// console.log(options)
 		// console.log(vote)
 	},
