@@ -30,8 +30,8 @@ if(Meteor.isServer){
 
 	
 
-	Meteor.users.insert(fromUser);
-	Meteor.users.insert(toUser);
+	WI.insert(fromUser);
+	WI.insert(toUser);
 
 	Unionize.connect(DummyData);
 }

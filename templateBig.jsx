@@ -6,7 +6,7 @@ var recommendListReact = Recommend.recommendListReact;
 var bigReact = new React.createClass({
 	getInitialState: function(){
 		var big = {};
-		var user = Meteor.users.findOne({
+		var user = WI.findOne({
 			"_id": userId,
 			// "inbox": {$elemMatch: {"_id": Session.get("imageId")}}
 		});
@@ -31,7 +31,7 @@ var bigReact = new React.createClass({
 				big = tempBig[0] || {};
 			// var imageId = Session.get("imageId");
 			// console.log(big);
-			// var user = Meteor.users.findOne({
+			// var user = WI.findOne({
 			// 	"_id": userId,
 			// 	// "inbox": {$elemMatch: {"_id": Session.get("imageId")}}
 			// });
@@ -114,7 +114,7 @@ var bigReact = new React.createClass({
 		console.log("onRecommend");
 		var o = options;
 		var recommend = {};
-		var user = Meteor.users.findOne(userId);
+		var user = WI.findOne(userId);
 		if(user && user.profile && user.profile.profile_picture)
 			recommend.sender_picture = user.profile.profile_picture;
 		else
@@ -148,7 +148,7 @@ var bigReact = new React.createClass({
 		var vote = {};
 		console.log("onVote");
 		var o = options;
-		var user = Meteor.users.findOne(userId);
+		var user = WI.findOne(userId);
 		if(user && user.profile && user.profile.profile_picture)
 			vote.profile_picture = user.profile.profile_picture;
 		else
