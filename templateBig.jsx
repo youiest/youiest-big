@@ -104,11 +104,11 @@ var bigReact = new React.createClass({
 			o.big = {};
 		}
 		o.vote = Vote.findOne({"userId": userId, "imageId": o.big._id});
-		// if(o.vote){
-		// 	this.onRecommend(options);
-		// }else{
+		if(o.vote){
+			this.onRecommend(options);
+		}else{
 			this.onVote(options);
-		// }
+		}
 	},
 	"onRecommend": function(options){
 		console.log("onRecommend");
