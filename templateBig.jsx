@@ -50,16 +50,26 @@ var bigReact = new React.createClass({
 	"render": function(){
 		// console.log(this.state.big);
 		// if(this.state.big){
-			return( 
-				<div className="ui segment">
-					<img 
-						className="ui centered image" 
-						src={this.state.big.image_low} 
-						onClick={this.onClickBig}/>
-					<voteListReact />
-					<recommendListReact />
-				</div>
+			return(                                                                     
+				React.DOM.div( {className:"ui segment"},                                   
+					React.DOM.img(                                                            
+						{className:"ui centered image",                                          
+						src:this.state.big.image_low,                                            
+						onClick:this.onClickBig}),                                               
+					voteListReact(null ),                                                     
+					recommendListReact(null )
+				)                                                                         
 			)
+			// return( 
+			// 	<div className="ui segment">
+			// 		<img 
+			// 			className="ui centered image" 
+			// 			src={this.state.big.image_low} 
+			// 			onClick={this.onClickBig}/>
+			// 		<voteListReact />
+			// 		<recommendListReact />
+			// 	</div>
+			// )
 		// }
 		// else{
 		// 	return( 
