@@ -176,8 +176,6 @@ var bigReact = new React.createClass({
 		vote.from_user = userId;
 		vote._id = Random.id();
 		vote.to_user = vote.imageId;
-		vote.from_key = "outbox";
-		vote.to_key = "inbox";
 		// }
 
 		Unionize.connect(vote);
