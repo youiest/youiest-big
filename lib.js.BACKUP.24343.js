@@ -23,11 +23,11 @@ var keys = {};
 keys.outbox = "inbox";
 keys.follow = "follower";
 Unionize.keys = keys;
-
+<<<<<<< HEAD
 // Feed.limit = 30;
 // Feed.keys = "feed";
 // Feed.skip = 10;
-
+=======
 
 this.modModifier = {};
 
@@ -51,7 +51,7 @@ modModifier.outbox = function(modifier, userId) {
 
 
 
-
+>>>>>>> 1681b383a13c203617caaa5487d07796728b8782
 
 Unionize.getUTC = function(){
 	return new Date().getTime();
@@ -151,19 +151,19 @@ Unionize.onWUpdateHook = function(userId, docs, key){
 
 
 WI.before.update(function(userId, doc, fieldNames, modifier, options){
-//
-//  for fieldName in fieldNames
-//    # do we have a function for this fieldname? 
-//    if _.has(modModifier, fieldName) 
-//      smite fieldName, doc, 'spinning modModifier', eval s
-//      # modify the modifier so the update is redirected before hitting db
-//      smite modifier = modModifier[fieldName] modifier, doc, userId
-//  
-//  if(_.has(afterModifier, fieldName)){
-//      smite fieldName, 'spinning afterModifier', eval s
-//      # modify the modifier so the update is redirected before hitting db
-//      modifier = afterModifier[fieldName] modifier, doc, userId
-//
+<<<<<<< HEAD
+  for fieldName in fieldNames
+    # do we have a function for this fieldname? 
+    if _.has(modModifier, fieldName) 
+      smite fieldName, doc, 'spinning modModifier', eval s
+      # modify the modifier so the update is redirected before hitting db
+      smite modifier = modModifier[fieldName] modifier, doc, userId
+  
+  if(_.has(afterModifier, fieldName)){
+      smite fieldName, 'spinning afterModifier', eval s
+      # modify the modifier so the update is redirected before hitting db
+      modifier = afterModifier[fieldName] modifier, doc, userId
+=======
   var fieldName, modifier, _i, _len;
   for (_i = 0, _len = fieldNames.length; _i < _len; _i++) {
     fieldName = fieldNames[_i];
@@ -171,7 +171,7 @@ WI.before.update(function(userId, doc, fieldNames, modifier, options){
       smite(fieldName, 'spinning afterModifier', eval(s));
       modifier = afterModifier[fieldName](modifier, doc, userId);
     }
-
+>>>>>>> 1681b383a13c203617caaa5487d07796728b8782
   }
   // // log(Meteor.isClient,Meteor.isServer)
   // var key = fieldNames[0];

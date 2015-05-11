@@ -23,35 +23,9 @@ var keys = {};
 keys.outbox = "inbox";
 keys.follow = "follower";
 Unionize.keys = keys;
-
 // Feed.limit = 30;
 // Feed.keys = "feed";
 // Feed.skip = 10;
-
-
-this.modModifier = {};
-
-modModifier.outbox = function(modifier, userId) {
-  var from, inserted, new_key, old_key, to;
-  old_key = 'outbox';
-  new_key = 'sending';
-  if (old_key !== new_key) {
-    smite(modifier, 'needs a new agenda', eval(s));
-    smite(eval(Object.defineProperty(modifier.$push, new_key, Object.getOwnPropertyDescriptor(modifier.$push, old_key))));
-    smite(eval(delete modifier.$push[old_key], 'deleted key', eval(s)));
-  }
-  smite('did we insert into W?', modifier, modifier.$push, from = modifier.$push.sending.from, to = modifier.$push.sending.to, eval(s));
-  inserted = W.insert({
-    to: to,
-    from: from
-  });
-  smite(inserted, 'how long did the insert hook take? usually 30ms', eval(s));
-  return modifier;
-};
-
-
-
-
 
 Unionize.getUTC = function(){
 	return new Date().getTime();
@@ -151,40 +125,19 @@ Unionize.onWUpdateHook = function(userId, docs, key){
 
 
 WI.before.update(function(userId, doc, fieldNames, modifier, options){
-//
-//  for fieldName in fieldNames
-//    # do we have a function for this fieldname? 
-//    if _.has(modModifier, fieldName) 
-//      smite fieldName, doc, 'spinning modModifier', eval s
-//      # modify the modifier so the update is redirected before hitting db
-//      smite modifier = modModifier[fieldName] modifier, doc, userId
-//  
-//  if(_.has(afterModifier, fieldName)){
-//      smite fieldName, 'spinning afterModifier', eval s
-//      # modify the modifier so the update is redirected before hitting db
-//      modifier = afterModifier[fieldName] modifier, doc, userId
-//
-  var fieldName, modifier, _i, _len;
-  for (_i = 0, _len = fieldNames.length; _i < _len; _i++) {
-    fieldName = fieldNames[_i];
-    if (_.has(afterModifier, fieldName)) {
-      smite(fieldName, 'spinning afterModifier', eval(s));
-      modifier = afterModifier[fieldName](modifier, doc, userId);
-    }
-
+  for fieldName in fieldNames
+    # do we have a function for this fieldname? 
+    if _.has(modModifier, fieldName) 
+      smite fieldName, doc, 'spinning modModifier', eval s
+      # modify the modifier so the update is redirected before hitting db
+      smite modifier = modModifier[fieldName] modifier, doc, userId
+  
+  if(_.has(afterModifier, fieldName)){
+      smite fieldName, 'spinning afterModifier', eval s
+      # modify the modifier so the update is redirected before hitting db
+      modifier = afterModifier[fieldName] modifier, doc, userId
   }
-  // // log(Meteor.isClient,Meteor.isServer)
-  // var key = fieldNames[0];
-  // // if(key == "follow")
-  // if(keys[key] && modifier["$push"] && modifier["$push"][key]){
-  //   var docs = modifier["$push"][key];
-  //   if(docs.cycleComplete)
-  //     return;
-  //   modifier["$push"][key] = Unionize.onWUpdateHook(userId, docs, keys[key]);
-  //   docs = modifier["$push"][key];
-  //   docs.journey.push({"onInsertWIInbox": Unionize.getUTC() - docs.startTime});
-  // }
-  // return docs;
+  return docs;
   // else if(fieldNames[0] == "follow"){
   //   modifier["$push"].follow = Unionize.onWUpdateHookFollow(userId, modifier["$push"].follow);
   //   var docs = modifier["$push"].follow;

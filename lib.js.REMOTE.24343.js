@@ -13,21 +13,14 @@ var WIModel = function(options){
   }
 }
 }
-
 Unionize = {};
 WI = new Mongo.Collection("wi");
 W = new Mongo.Collection("w");
 log = console.log.bind(console);
-
 var keys = {};
 keys.outbox = "inbox";
 keys.follow = "follower";
 Unionize.keys = keys;
-
-// Feed.limit = 30;
-// Feed.keys = "feed";
-// Feed.skip = 10;
-
 
 this.modModifier = {};
 
@@ -48,7 +41,6 @@ modModifier.outbox = function(modifier, userId) {
   smite(inserted, 'how long did the insert hook take? usually 30ms', eval(s));
   return modifier;
 };
-
 
 
 
@@ -114,7 +106,7 @@ Unionize.onWUpdateHook = function(userId, docs, key){
   docs.journey.push({"onWUpdateHook": Unionize.getUTC()- docs.startTime});
 
   // console.log(docs._id,Meteor.isClient,Meteor.isServer)
-  docs.key = key;
+  docs.key = Feed.keys;
   docs.cycleComplete = true;
   W.insert(docs);
 
@@ -122,7 +114,7 @@ Unionize.onWUpdateHook = function(userId, docs, key){
 
   
   var update = {};
-  update[key] = docs;
+  update[Feed.keys] = docs;
   WI.update(docs.to_user,{$push: update});
   docs.journey.push({"onInsertWIInbox": Unionize.getUTC()- docs.startTime});
   // if(WI.find(docs.to_user).count()){
@@ -151,19 +143,6 @@ Unionize.onWUpdateHook = function(userId, docs, key){
 
 
 WI.before.update(function(userId, doc, fieldNames, modifier, options){
-//
-//  for fieldName in fieldNames
-//    # do we have a function for this fieldname? 
-//    if _.has(modModifier, fieldName) 
-//      smite fieldName, doc, 'spinning modModifier', eval s
-//      # modify the modifier so the update is redirected before hitting db
-//      smite modifier = modModifier[fieldName] modifier, doc, userId
-//  
-//  if(_.has(afterModifier, fieldName)){
-//      smite fieldName, 'spinning afterModifier', eval s
-//      # modify the modifier so the update is redirected before hitting db
-//      modifier = afterModifier[fieldName] modifier, doc, userId
-//
   var fieldName, modifier, _i, _len;
   for (_i = 0, _len = fieldNames.length; _i < _len; _i++) {
     fieldName = fieldNames[_i];
@@ -171,7 +150,6 @@ WI.before.update(function(userId, doc, fieldNames, modifier, options){
       smite(fieldName, 'spinning afterModifier', eval(s));
       modifier = afterModifier[fieldName](modifier, doc, userId);
     }
-
   }
   // // log(Meteor.isClient,Meteor.isServer)
   // var key = fieldNames[0];
