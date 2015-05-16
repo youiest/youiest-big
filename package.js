@@ -6,7 +6,6 @@ Package.describe({
   documentation: 'README.md'
 });
 
-
 Package.on_use(function (api) {
   api.versionsFrom('1.0.3.1');
   api.use([
@@ -14,9 +13,10 @@ Package.on_use(function (api) {
     'deps',
     'tracker',
     'session',
-    'pedrohenriquerls:reactjs',
+    'reactjs:react',
     'youiest:vote',
     'youiest:recommend',
+    'mongo',
     ], ['client', 'server']);
 
   // like Document W will be an extended coll..
@@ -58,7 +58,7 @@ Package.on_test(function (api) {
       'deps',
       'tracker',
       'session',
-      'pedrohenriquerls:reactjs',
+      'reactjs:react',
       'youiest:vote',
       
       'underscore',
@@ -74,7 +74,7 @@ Package.on_test(function (api) {
       'accounts-password', 
       'underscore', 
       'random', 
-      'pedrohenriquerls:reactjs',
+      'reactjs:react',
       'mongo',
       'youiest:unionize'
     ], 

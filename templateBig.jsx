@@ -2,8 +2,8 @@
 userId = "nicolsondsouza";
 // console.log(Vote);
 var voteListReact = Vote.voteListReact;
-var recommendListReact = Recommend.recommendListReact;
-var bigReact = new React.createClass({
+var RecommendListReact = Recommend.RecommendListReact;
+var BigReact = new React.createClass({
 	getInitialState: function(){
 		var big = {};
 		var user = WI.findOne({
@@ -57,7 +57,7 @@ var bigReact = new React.createClass({
 						src:this.state.big.image_low,                                            
 						onClick:this.onClickBig}),                                               
 					voteListReact(null ),                                                     
-					recommendListReact(null )
+					RecommendListReact(null )
 				)                                                                         
 			)
 			// return( 
@@ -67,7 +67,7 @@ var bigReact = new React.createClass({
 			// 			src={this.state.big.image_low} 
 			// 			onClick={this.onClickBig}/>
 			// 		<voteListReact />
-			// 		<recommendListReact />
+			// 		<RecommendListReact />
 			// 	</div>
 			// )
 		// }
@@ -187,8 +187,8 @@ var bigReact = new React.createClass({
 		var o = options;
 	}
 });
-Big.big = bigReact;
+Big.big = BigReact;
 
 Template.bigPackage.rendered = function(){
-	React.renderComponent(<bigReact />, document.getElementById('bigPackage'))
+	React.renderComponent(<BigReact />, document.getElementById('bigPackage'))
 }
